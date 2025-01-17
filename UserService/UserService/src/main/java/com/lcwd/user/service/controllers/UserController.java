@@ -65,4 +65,12 @@ public class UserController {
         List<User> allUser = userService.getAllUser();
         return ResponseEntity.ok(allUser);
     }
+
+    // update the user
+      @PutMapping("/{userId}")
+    public ResponseEntity<String> updateUser(@PathVariable String userId, @RequestBody User user) throws ResourceNotFoundException {
+        User updatedUser = userService.updateUser(userId, user);
+        String message = "User with ID " + userId + " has been successfully updated.";
+        return ResponseEntity.ok(message);
+    }
 }
