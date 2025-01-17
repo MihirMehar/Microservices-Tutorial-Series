@@ -75,4 +75,32 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+    // update the user
+    // step we use optional to avoid null pointer exception 
+    // first we need user present with given user id in server then we get user .
+    // then update the user
+     @Override
+    public User updateUser(String userId, User user) throws ResourceNotFoundException {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(optionalUser.isPresent()) {
+            User user1 = optionalUser.get();
+            if (user.getName() != null) {
+                user1.setName(user.getName());
+            }
+            if (user.getEmail() != null) {
+                user1.setEmail(user.getEmail());
+            }
+            if (user.getAbout() != null) {
+                user1.setAbout(user.getAbout());
+            }
+
+            return userRepository.save(user);
+        }
+        else{
+            throw new ResourceNotFoundException ("User not found with ID: " + userId);
+        }
+    }
+
+    
 }
