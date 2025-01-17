@@ -20,6 +20,7 @@ public interface UserService {
 
     //TODO: delete
     //TODO: update
-
+     // this method help us to update user in server
+    User updateUser(String userId,User user) throws ResourceNotFoundException;
 
 }
